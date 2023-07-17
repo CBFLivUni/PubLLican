@@ -1,0 +1,3 @@
+Cached files are created in this folder to prevent repeated calling of the same API.
+Deleting the files in this folder will cause the API to be called again.
+(This may give different results, as chatGPT is non-deterministic.)

@@ -1,0 +1,4 @@
+openai
+pdfminer
+pypandoc_binary
+pandas
