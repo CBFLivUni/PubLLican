@@ -39,7 +39,7 @@ PDF here: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811644/pdf/EMBR-23-e540
 | PfCDPK7                                      |                                    |
 | PfPI4K                                       |                                    |
 |                                              |                                    |
-| **GO terms**                                 | **Go Terms:**                      |
+| **GO terms**                                 | **GO Terms:**                      |
 | GO:0006468                                   | GO:0006468                         |
 | GO:0006629                                   | GO:0006656                         |
 | GO:0008104                                   | GO:0005515                         |
