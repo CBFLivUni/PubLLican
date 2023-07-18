@@ -1,5 +1,5 @@
 # PubLLican
-Publication GO term annotation using ChatGPT
+Extraction of species, genes and GO terms from publications, using GPT API
 
 To use:
 
