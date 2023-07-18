@@ -24,8 +24,8 @@ chatGPT is non-deterministic - the results you get may be different even with th
 
 The following example is generated from the paper
 "PI4-kinase and PfCDPK7 signaling regulate phospholipid biosynthesis in Plasmodium falciparum"
-[https://pubmed.ncbi.nlm.nih.gov/34866326/]
-PDF here: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811644/pdf/EMBR-23-e54022.pdf]
+[https://pubmed.ncbi.nlm.nih.gov/34866326/]  
+PDF here: [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8811644/pdf/EMBR-23-e54022.pdf]  
 
 | PubLLican Generated                          | Manually curated                   |
 |----------------------------------------------|------------------------------------|
