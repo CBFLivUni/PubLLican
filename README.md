@@ -9,7 +9,7 @@ Get an openAI API key, from openAI.com
 
 Save it in a text file called apikey.txt
 
-    python publican.py <inputfile.pdf>
+    python PubLLican.py <inputfile.pdf>
 
 Output produced:
 
