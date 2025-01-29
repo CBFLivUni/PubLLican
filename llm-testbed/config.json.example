@@ -1,0 +1,119 @@
+{
+    "llm": {
+        "current": {
+            "type": "anthropic",
+            "model": "claude-3-haiku-20240307"
+        }
+    },
+    "paths": {
+        "status": "./caches/status",
+        "pdf": "./caches/articles/pdf",
+        "plaintext": "./caches/articles/plaintext",
+        "sections": "./caches/articles/json"
+    },
+    "getTextFromJSON": {
+        "sections": [
+            "abstract",
+            "title",
+            "intro",
+            "results",
+            "discussion",
+            "methods"
+        ]
+    },
+    "getPaperSpecies": {
+        "systemPrompt": "The user will input a series of extracts from a PubMed publication. Respond with only the species that the publication concerns. Respond in JSON, using the following schema: {\"species\": [\"1st species name\", \"2nd species name\", \"3rd species name, etc\"]} This must be parsable, so do NOT include \\n or anything similar which will make the validation fail for the JSON schema. You must respond with NO text other than the JSON",
+        "responseSchema": {
+            "type": "object",
+            "properties": {
+                "species": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                }
+            },
+            "required": [
+                "species"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "getPaperGenes": {
+        "systemPrompt": "The user will input a series of extracts from a PubMed publication. You are to respond only with the genes associated with the species of the paper. Respond in JSON, using the following schema: {\"species\": [{\"name\": \"1st species name\", \"genes\": [{\"identifier\": \"identifier of gene 1 for 1st species\", \"name\": \"name of gene 1 for 1st species\"}, {\"identifier\": \"identifier of gene 2 for 1st species\", \"name\": \"name of gene 2 for 1st species\"}, \"etc\"]}]}, etc. This must be parsable, so do NOT include \\n or anything similar which will make the validation fail for the JSON schema. You must respond with NO text other than the raw JSON, in compressed format (i.e. no indentation, new lines) to limit the amount of characters that must be stored. You must account for ALL the genes in the paper, and each species object should contain ALL the genes associated with in in the paper. Here are the species: ",
+        "responseSchema": {
+            "type": "object",
+            "properties": {
+                "species": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "genes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "identifier": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "identifier",
+                                        "name"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "genes"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": [
+                "species"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "getPaperGOTerms": {
+        "systemPromptStart": "The user is going to give you a pair of gene and species. Give all Gene Ontology terms associated with this pair in the given publication as a JSON list i.e. [{\"id\": \"GO:4526854138\", \"description\": \"description for first go term\"}, {\"id\": \"GO:3284974\", \"description\": \"description for second go term\"}]. It must follow that schema to pass validation as it will be processed. You must give NO other commentary than the JSON array.\nHere is the publication:\n\n",
+        "responseSchema": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "pattern": "^GO:\\d{7}$"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "description"
+                ],
+                "additionalProperties": false
+            }
+        }
+    },
+    "validateGOTermDescriptions": {
+        "systemPrompt": "You are being used as part of a system to compare assumed Gene Ontology term descriptions to their actual descriptions. You will be asked a simple true or false question along the lines of \"Does 'x' mean the same as 'y'\". You must respond in simple JSON format, following schema {\"result\": true} or {\"result\": false}. You must return NOTHING else than the valid JSON.",
+        "responseSchema": {
+            "type": "boolean"
+        }
+    }
+}
