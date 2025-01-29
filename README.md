@@ -1,6 +1,7 @@
 # PubLLican
 Extraction of species, genes and GO terms from publications, using GPT API
 
+This folder contains a working example.  A more comprehensive, in progress, workflow is in the llm-testbed folder
 To use:
 
     pip install -r requirements.txt
